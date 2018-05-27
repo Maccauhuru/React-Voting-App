@@ -1,33 +1,54 @@
-class Episodes extends React.Component{
-    render(){
-    return (
-    <div className='ui unstackable items'>
-        <EpisodeList />
-    </div>);
-}
+class EpisodesList extends React.Component {
+    render() {
+        const episodeComponents = Seeds.episodes.map((episode) =>
+            (
+                <Episode
+                    key={'episode' + episode.id}
+                    id={episode.id}
+                    title={episode.title}
+                    description={episode.description}
+                    url={episode.url}
+                    votes={episode.votes}
+                    submitterAvatarUrl={episode.submitterAvatarUrl}
+                    episodeImageUrl={episode.episodeImageUrl}
+                />
+            ));
+        return (
+            <div className="ui unstackable items">
+                {episodeComponents}
+            </div>
+        );
+    }
 }
 
 
-class EpisodeList extends React.Component {
+class Episode extends React.Component {
     render() {
         return (
             <div className='item'>
                 <div className='image'>
-                    <img src='images/products/image-aqua.png' />
+                    <img src={this.props.episodeImageUrl} />
                 </div>
                 <div className='middle aligned content'>
+                    <div className='header'>
+                        <a>
+                            <i className='large caret up icon' />
+                        </a>
+                        {this.props.votes}
+                    </div>
                     <div className='description'>
-                        <a>Grow Fast or Die Slow</a>
+                        <a href={this.props.url}>
+                            {this.props.title}
+                        </a>
                         <p>
-                            The pressure to get things right stymies Richard and forces him to grow the company in a way he had not planned. Dinesh and Gilfoyle question their ability to make good decisions.
-                            Gavin returns to Hooli and worries about becoming antiquated.
+                            {this.props.description}
                         </p>
                     </div>
                     <div className='extra'>
                         <span>Submitted by:</span>
                         <img
                             className='ui avatar image'
-                            src='images/avatars/daniel.jpg'
+                            src={this.props.submitterAvatarUrl}
                         />
                     </div>
                 </div>
@@ -36,7 +57,6 @@ class EpisodeList extends React.Component {
     }
 }
 
-
-ReactDOM.render(<Episodes />, document.getElementById("content"));
+ReactDOM.render(<EpisodesList />, document.getElementById("content"));
 
 
