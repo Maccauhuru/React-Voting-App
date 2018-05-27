@@ -12,3 +12,10 @@
 i.icon {
   margin: 0;
 }
+
+.image-style {
+  width:500px;
+  height:500px;
+  padding-right:5px;
+  
+}
