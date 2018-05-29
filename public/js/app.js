@@ -1,5 +1,8 @@
 class EpisodesList extends React.Component {
     render() {
+       const episodes = Seeds.episodes.sort((a,b)=>(
+           b.votes - a.votes
+        ));
         const episodeComponents = Seeds.episodes.map((episode) =>
             (
                 <Episode
