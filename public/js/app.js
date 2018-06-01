@@ -2,6 +2,9 @@ class EpisodesList extends React.Component {
     handleUpvoteBtnClick(episodeId) {
         console.log(`${episodeId} was clicked.`)  
     };
+    handleDownVoteBtnClick(episodeName){
+        console.log(`You downvoted the "${episodeName}" Episode!`);
+    }
 
     render() { 
        const episodes = Seeds.episodes.sort((a,b)=>(
@@ -19,6 +22,7 @@ class EpisodesList extends React.Component {
                     submitterAvatarUrl={episode.submitterAvatarUrl}
                     episodeImageUrl={episode.episodeImageUrl}
                     onUpVote= {this.handleUpvoteBtnClick}
+                    onDownVote={this.handleDownVoteBtnClick}
                 />
             ));
         return (
@@ -33,11 +37,16 @@ class Episode extends React.Component {
     constructor(props){
         super(props);
         this.handleUpVote = this.handleUpVote.bind(this);
+        this.handleDownVote = this.handleDownVote.bind(this);
     }
 
     //Inside 'Episode'
     handleUpVote(){
         this.props.onUpVote(this.props.id)
+    }
+
+    handleDownVote (){
+        this.props.onDownVote(this.props.title)
     }
     render() {
         return (
@@ -51,6 +60,10 @@ class Episode extends React.Component {
                             <i className='large caret up icon'  />
                         </a>
                         {this.props.votes}
+                        <a onClick={this.handleDownVote}>
+                            <i className='large caret down icon' />
+                        </a>
+                       
                     </div>
                     <div className='description'>
                         <a href={this.props.url}>
