@@ -49,19 +49,26 @@ class Episode extends React.Component {
         this.props.onDownVote(this.props.title)
     }
     render() {
+        let redBtnStyle ={
+            color:'red'
+        }
+        let greenBtnStyle = {
+            color: 'green'
+        }
         return (
             <div className='item'>
                 <div className='image'>
                     <img src={this.props.episodeImageUrl} />
                 </div>
+                {/*apply style to buttons on components*/}
                 <div className='middle aligned content'>
                     <div className='header'>
                         <a onClick={this.handleUpVote}>
-                            <i className='large caret up icon'  />
+                            <i className='large caret up icon' style={greenBtnStyle} />
                         </a>
                         {this.props.votes}
                         <a onClick={this.handleDownVote}>
-                            <i className='large caret down icon' />
+                            <i className='large caret down icon' style={redBtnStyle}/>
                         </a>
                        
                     </div>
