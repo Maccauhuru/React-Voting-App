@@ -1,13 +1,24 @@
+//initialize our state to an object with an empty products array.
 class EpisodesList extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            episodes : [],
+        };
+    }
+        componentDidMount() {
+            this.setState({episodes : Seeds.episodes});
+        };
+    
     handleUpvoteBtnClick(episodeId) {
         console.log(`${episodeId} was clicked.`)  
     };
-    handleDownVoteBtnClick(episodeName){
-        console.log(`You downvoted the "${episodeName}" Episode!`);
+    handleDownVoteBtnClick(episodeTitle){
+        console.log(`You downvoted the "${episodeTitle}" Episode!`);
     }
 
     render() { 
-       const episodes = Seeds.episodes.sort((a,b)=>(
+       const episodes = this.state.episodes.sort((a,b)=>(
            b.votes - a.votes
         ));
         const episodeComponents = Seeds.episodes.map((episode) =>
