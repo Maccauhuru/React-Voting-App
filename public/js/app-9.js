@@ -3,7 +3,6 @@
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       products: [],
     };
@@ -15,7 +14,6 @@ class ProductList extends React.Component {
     this.setState({ products: Seed.products });
   }
 
-  // Inside `ProductList`
   handleProductUpVote(productId) {
     const nextProducts = this.state.products.map((product) => {
       if (product.id === productId) {
