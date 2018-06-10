@@ -19,3 +19,10 @@ i.icon {
   padding-right:5px;
   
 }
+  .redBtnStyle {
+    color: 'red'
+  }
+
+  .greenBtnStyle {
+    color: 'green'
+  }

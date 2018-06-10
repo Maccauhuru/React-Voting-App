@@ -3,41 +3,48 @@ class EpisodesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      episodes: []
+      episodes: [],
     };
-    this.handleUpvoteBtnClick = this.handleUpvoteBtnClick.bind(this);
-    //this.handleEpisodeDownVote = this.handleEpisodeDownVote.bind(this);
+    this.handleUpVoteBtn = this.handleUpVoteBtn.bind(this);
+    this.handleDownVoteBtn = this.handleDownVoteBtn.bind(this);
   }
   componentDidMount() {
     this.setState({ episodes: Seeds.episodes });
   }
 
-  handleUpVoteBtnClick(episodeId) {
- const nextEpisodes = this.state.episodes.map((episode) => {
-   if (episode.id === episodeId) {
-     return Object.assign({}, episode, {
-       votes: episode.votes + 1,
-     });
-   } else {
-     return episode;
-   }
- });
-
- this.setState({
-   episodes: nextEpisodes,
- });
-
-  }
-  handleDownVoteBtnClick(episodeTitle) {
-    console.log(`You downvoted the "${episodeTitle}" Episode!`);
+ handleUpVoteBtn(episodeId) {
+   const nextEpisodes = this.state.episodes.map((episode) => {
+     if (episode.id === episodeId) {
+       return Object.assign({}, episode, {
+         votes: episode.votes + 1,
+       });
+     } else {
+       return episode;
+     }
+   });
+   this.setState({
+     episodes: nextEpisodes,
+   });
+ }
+  handleDownVoteBtn(episodeId) {
+    const nextEpisodes = this.state.episodes.map((episode)=>{
+      if(episode.id === episodeId){
+        return Object.assign({},episode,{
+          votes : episode.votes - 1,
+        });
+      } else {
+        return episode;
+      }
+    });
+    this.setState({
+      episodes : nextEpisodes,
+    });
   }
 //inside EpisodesList
 
-
-
   render() {
     const episodes = this.state.episodes.sort((a, b) => b.votes - a.votes);
-    const episodeComponents = Seeds.episodes.map(episode => (
+    const episodeComponents = episodes.map(episode => (
       <Episode
         key={"episode" + episode.id}
         id={episode.id}
@@ -47,8 +54,8 @@ class EpisodesList extends React.Component {
         votes={episode.votes}
         submitterAvatarUrl={episode.submitterAvatarUrl}
         episodeImageUrl={episode.episodeImageUrl}
-        onUpVote={this.handleUpVoteBtnClick}
-        onDownVote={this.handleDownVoteBtnClick}
+        onUpVote={this.handleUpVoteBtn}
+        onDownVote={this.handleDownVoteBtn}
       />
     ));
     return <div className="ui unstackable items">{episodeComponents}</div>;
@@ -62,13 +69,12 @@ class Episode extends React.Component {
     this.handleDownVote = this.handleDownVote.bind(this);
   }
 
-  //Inside 'Episode'
   handleUpVote() {
     this.props.onUpVote(this.props.id);
   }
 
   handleDownVote() {
-    this.props.onDownVote(this.props.title);
+    this.props.onDownVote(this.props.id);
   }
   render() {
     let redBtnStyle = {
