@@ -30,6 +30,7 @@ App requires [Node.js](https://nodejs.org/) v4+ to run.
 Install the dependencies and devDependencies and start the server.
 
 ### Development
+
    [ReactJS]: <http://reactjs.org>   
    [markdown-it]: <https://github.com/markdown-it/markdown-it>
    [node.js]: <http://nodejs.org>
